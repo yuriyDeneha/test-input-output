@@ -1,0 +1,9 @@
+<p>parent works!</p>
+
+<app-child
+  [translation]="translationObject"
+  [counter]="counter"
+  [dateNow]="dateNow"
+  (onIncreaseCounter)="increaseCounter()"
+  (onIncreaseDate)="increaseDatePlusOne()"
+></app-child>

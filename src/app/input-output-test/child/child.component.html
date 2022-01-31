@@ -1,0 +1,11 @@
+<h1> {{ translation.title | uppercase }} </h1>
+<p> {{ translation.description }} </p>
+<p> Now: {{ dateNow | date : 'mediumDate' }} </p>
+
+<button (click)="increaseCounter()">+ 1</button>
+<button (click)="increaseDate()">+ 1 Day</button>
+
+<div class="counter__wrapper">
+  <label>Double counter value</label>
+  <span class="counter">{{ counter | toDoubleValue }}</span>
+</div>
