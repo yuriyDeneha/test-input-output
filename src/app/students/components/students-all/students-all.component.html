@@ -1,0 +1,14 @@
+<ul class="wrapper">
+  <li class="student" *ngFor="let student of students">
+    <span class="student__param">{{student.id}}</span>
+    <span class="student__param">{{student.name}}</span>
+    <span class="student__param">{{student.age}}</span>
+    <span class="student__param">{{student.aboutMe}}</span>
+    <span class="student__param student__param_color" [style.backgroundColor]="student.favouriteColor">{{student.favouriteColor}}</span>
+    <span class="student__param">{{student.birthday | date: 'mediumDate'}}</span>
+
+    <a [routerLink]="['../', student.id, 'update']">Update</a>
+    <a [routerLink]="['../', student.id, 'read']">Detail</a>
+    <button type="button" (click)="deleteStudent(student.id)">Delete</button>
+  </li>
+</ul>

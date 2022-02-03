@@ -1,0 +1,36 @@
+<form [formGroup]="studentForm" (submit)="updateStudent()">
+
+  <label for="">Id: </label>
+  <input type="text" formControlName="id" name="id" disabled>
+
+  <label for="">Name: </label>
+  <input type="text" formControlName="name" name="name">
+
+
+  <label for="">About Me: </label>
+  <textarea type="text" formControlName="aboutMe" name="aboutMe"></textarea>
+
+
+  <label for="">Age: </label>
+  <input type="number" formControlName="age" name="age">
+
+
+  <label for="">Favourite Color: </label>
+  <input type="color" formControlName="favouriteColor" name="color">
+
+
+  <label for="">Birthday: </label>
+  <input type="date" formControlName="birthday" name="birthday">
+
+  <label for="">Gender: </label>
+  <select name="gender" id="gender" formControlName="gender">
+    <option [value]="Gender.PreferNotToSay">{{Gender.PreferNotToSay}}</option>
+    <option [value]="Gender.Female">{{Gender.Female}}</option>
+    <option [value]="Gender.Make">{{Gender.Make}}</option>
+  </select>
+
+
+  <button type="button" [routerLink]="'../../all'">Back</button>
+  <button type="reset" (click)="studentForm.reset()">Reset</button>
+  <button type="submit" [disabled]="studentForm.invalid">Save</button>
+</form>
