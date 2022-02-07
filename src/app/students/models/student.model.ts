@@ -18,7 +18,7 @@ export class Student {
   }
 
   static generateId() {
-    return (Math.random() * 100).toString();
+    return (Math.round(Math.random() * 100)).toString();
   }
 }
 

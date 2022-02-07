@@ -10,10 +10,11 @@ import { StudentsUpdateComponent } from './components/students-update/students-u
 import { StudentsReadComponent } from './components/students-read/students-read.component';
 import { StudentsDeleteComponent } from './components/students-delete/students-delete.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { StudentFormComponent } from './components/student-form/student-form.component';
 
 
 @NgModule({
-  declarations: [IndexComponent, StudentsAllComponent, StudentsCreateComponent, StudentsUpdateComponent, StudentsReadComponent, StudentsDeleteComponent],
+  declarations: [IndexComponent, StudentsAllComponent, StudentsCreateComponent, StudentsUpdateComponent, StudentsReadComponent, StudentsDeleteComponent, StudentFormComponent],
   imports: [
     CommonModule,
     StudentsRoutingModule,

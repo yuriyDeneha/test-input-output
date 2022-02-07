@@ -12,15 +12,8 @@ import { DatePipe } from '@angular/common';
 })
 export class StudentsUpdateComponent implements OnInit {
 
-  studentForm = this.fb.group({
-    id: ['', Validators.required],
-    name: ['', Validators.required],
-    aboutMe: ['', Validators.required],
-    age: [0, Validators.required],
-    favouriteColor: ['', Validators.required],
-    birthday: [new Date(), Validators.required],
-    gender: [Gender.PreferNotToSay, Validators.required],
-  });
+  student: Student;
+
 
   constructor(
     private fb: FormBuilder,
@@ -35,6 +28,7 @@ export class StudentsUpdateComponent implements OnInit {
       const studentId = params.student_id;
       this.getStudentById(studentId);
     })
+
   }
 
   getStudentById(studentId: string) {
@@ -46,27 +40,13 @@ export class StudentsUpdateComponent implements OnInit {
         if (!student){
           return;
         }
-
-        this.updateForm(student);
+        this.student = student;
       })
   }
+  updateStudent(student: Student) {
+    console.log('---student', student);
 
-  updateForm(student: Student) {
-    this.studentForm.patchValue({
-      ... student,
-      birthday: this.datePipe.transform(student.birthday, 'yyyy-MM-dd')
-    });
-  }
-
-  get Gender() {
-    return Gender;
-  }
-
-  updateStudent() {
-    const udpatedStudent = this.studentForm.value;
-    console.log('---udpatedStudent', udpatedStudent);
-
-    this.studentsService.update(udpatedStudent)
+    this.studentsService.update(student)
       .subscribe((result) => {
         console.log('---result', result);
 
@@ -74,7 +54,6 @@ export class StudentsUpdateComponent implements OnInit {
           this.router.navigate(['../../all'], { relativeTo: this.activatedRoute });
         }
       })
-
   }
 
 }

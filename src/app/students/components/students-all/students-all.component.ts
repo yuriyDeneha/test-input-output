@@ -1,6 +1,7 @@
 import { StudentsService } from './../../services/students.service';
 import { Component, OnInit } from '@angular/core';
 import { Student } from '../../models/student.model';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-students-all',
@@ -11,7 +12,11 @@ export class StudentsAllComponent implements OnInit {
 
   students: Student[];
 
-  constructor(private studentsService: StudentsService) { }
+  constructor(
+    private studentsService: StudentsService,
+    private router: Router,
+    private activetedRoute: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
 
@@ -30,6 +35,11 @@ export class StudentsAllComponent implements OnInit {
       console.log('Delte student status: ', result);
       this.getStudents();
     });
+
+  }
+
+  redirectToCreateForm() {
+    this.router.navigate(['../create'], { relativeTo: this.activetedRoute });
   }
 
 }
