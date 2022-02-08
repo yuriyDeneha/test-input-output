@@ -1,5 +1,5 @@
 import { Student } from './../../models/student.model';
-import { Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChanges, OnDestroy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Gender } from '../../models/student.model';
 import { DatePipe } from '@angular/common';
@@ -9,10 +9,11 @@ import { DatePipe } from '@angular/common';
   templateUrl: './student-form.component.html',
   styleUrls: ['./student-form.component.scss']
 })
-export class StudentFormComponent implements OnInit, OnChanges {
+export class StudentFormComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit {
 
   @Input() student = new Student();
   @Output() submitted = new EventEmitter();
+  @ViewChild('form') formRef: ElementRef;
 
   studentForm: FormGroup;
 
@@ -21,9 +22,11 @@ export class StudentFormComponent implements OnInit, OnChanges {
     private datePipe: DatePipe
   ) {
     this.initForm();
+    console.log('----constructor')
   }
 
   ngOnInit(): void {
+    console.log('----ngOnInit');
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -31,6 +34,15 @@ export class StudentFormComponent implements OnInit, OnChanges {
     if (changes && changes.student && this.student){
       this.updateForm(this.student)
     }
+  }
+
+  ngAfterViewInit() {
+    console.log('----ngAfterViewInit')
+    this.formRef.nativeElement.style.opacity = 0.5
+  }
+
+  ngOnDestroy() {
+    console.log('----ngOnDestroy');
   }
 
   initForm() {
@@ -57,7 +69,6 @@ export class StudentFormComponent implements OnInit, OnChanges {
   }
 
   updateForm(student: Student) {
-    console.log(student);
     this.studentForm.patchValue({
       ... student,
       birthday: this.datePipe.transform(student.birthday, 'yyyy-MM-dd')

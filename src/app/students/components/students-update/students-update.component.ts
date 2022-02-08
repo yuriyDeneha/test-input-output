@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-students-update',
@@ -13,7 +14,7 @@ import { DatePipe } from '@angular/common';
 export class StudentsUpdateComponent implements OnInit {
 
   student: Student;
-
+  subscriptions: Subscription[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -33,7 +34,7 @@ export class StudentsUpdateComponent implements OnInit {
 
   getStudentById(studentId: string) {
     console.log('--studentId', studentId)
-    this.studentsService.getById(studentId)
+    const subscription = this.studentsService.getById(studentId)
       .subscribe((student: Student) => {
         console.log('--student', student)
 
@@ -42,7 +43,9 @@ export class StudentsUpdateComponent implements OnInit {
         }
         this.student = student;
       })
+    this.subscriptions.push(subscription);
   }
+
   updateStudent(student: Student) {
     console.log('---student', student);
 
@@ -56,4 +59,8 @@ export class StudentsUpdateComponent implements OnInit {
       })
   }
 
+  ngOnDestroy() {
+    console.log('----ngOnDestroy');
+    this.subscriptions.forEach((subscription: Subscription) => subscription.unsubscribe());
+  }
 }

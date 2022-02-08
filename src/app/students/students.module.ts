@@ -11,6 +11,8 @@ import { StudentsReadComponent } from './components/students-read/students-read.
 import { StudentsDeleteComponent } from './components/students-delete/students-delete.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StudentFormComponent } from './components/student-form/student-form.component';
+import { SharedModule } from '../shared/shared.module';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { StudentFormComponent } from './components/student-form/student-form.com
     CommonModule,
     StudentsRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule,
+    MatSnackBarModule
   ],
   providers: [
     DatePipe,

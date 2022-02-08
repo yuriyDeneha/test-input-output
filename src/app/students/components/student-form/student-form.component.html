@@ -1,4 +1,4 @@
-<form [formGroup]="studentForm" (submit)="submit()">
+<form #form [formGroup]="studentForm" (submit)="submit()">
 
   <label for="">Id: </label>
   <input type="text" formControlName="id" name="id" disabled>
